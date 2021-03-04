@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import { Image, StyleSheet, Text, TextInput, Alert } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, Alert, View } from 'react-native';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 import AppContainer from './AppContainer';
 
@@ -16,6 +16,7 @@ export default function SignalementTabComponent() {
       }
       let retard = duree === 'abs' ? 'Je serai absent.' : 'Je serai en retard de '+duree+' minutes.';
       console.log(retard, ' Raison : ', raisonRetard);
+      
       Alert.alert(
         retard,
         "Raison : "+raisonRetard,
@@ -25,11 +26,11 @@ export default function SignalementTabComponent() {
             onPress: () => console.log("Je ne serai pas en retard"),
             style: "cancel"
           },
-          { text: "OK", onPress: () => console.log("Retard signalé") }
+          { text: "OK", 
+            onPress: () => console.log("Retard signalé") }
         ],
         {cancelable: false}
       );
-    
     }
 
     const showMenu = () => {
@@ -52,23 +53,28 @@ export default function SignalementTabComponent() {
           Signaler un retard / une absence
         </Text>
         <Image
-          style={{ resizeMode: "cover", width: 400, marginBottom: 10 }}
+          style={{ resizeMode: "cover", width: '100%', marginBottom: 10 }}
           source={
             require('../assets/late.png')
           }
-        ></Image>
-        <TextInput
-          style={{ 
-            height: 150,
-            borderColor: 'gray', 
-            borderWidth: 1,
-            margin: 10,
-            textAlign: 'center'
-          }}
-          onChangeText={text => setRaisonRetard(text)}
-          value={raisonRetard}
         />
-
+        <View>
+          <Text>Raison du retard : </Text>
+          <TextInput
+            style={{ 
+              alignSelf: 'center',
+              justifyContent: 'center',
+              width: '70%',
+              height: 150,
+              borderColor: 'gray', 
+              borderWidth: 1,
+              margin: 10,
+              textAlign: 'center'
+            }}
+            onChangeText={text => setRaisonRetard(text)}
+            placeholder="Renseignez la raison"
+          />
+        </View>
         <Menu 
           style={styles.menu}
           ref={menu} 
@@ -91,6 +97,7 @@ export default function SignalementTabComponent() {
 
 const styles = StyleSheet.create({
   menu: {
+    marginTop: 50,
     display: 'flex',
     alignItems: 'flex-end'
   },
