@@ -2,6 +2,8 @@ import React from "react";
 import { Text } from "react-native";
 import AppContainer from "./AppContainer";
 
+
+
 export default function HomeTabComponent() {
   return (
     <AppContainer>
